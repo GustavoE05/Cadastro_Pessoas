@@ -1,3 +1,19 @@
+const mysql = require('mysql2/promise');
+
+async function connect(){
+    try{
+    return await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'cadastro_pessoas'
+    })
+    }catch(err){
+        console.log(err);
+        throw err;
+    }
+}
+
 async function query(sql){
     const connection = await connect();
     try{

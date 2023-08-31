@@ -8,6 +8,7 @@ require('dotenv').config();
 const app = express();
 const port = 2000;
 const Database = require('./Models/Database');
+const Pessoa = require('./Models/PessoasModels');
 
 
 app.use(express.static(path.join(__dirname, 'PUBLIC')));
@@ -15,7 +16,7 @@ app.use(session({secret: 'l1nd4c4ch34d4'}));
 
 app.use((req, res, next) => {
     if(!req.session.user){
-        if(req.url == '/login' || req.url == '/autenticar'){
+        if(req.url == '/login' || req.url == '/autenticar' || req.url == '/cadastro'){
             app.set('layout', 'layouts/default/login');
             res.locals.layoutsVAriables = {
                 url : process.env.URL,
@@ -25,7 +26,7 @@ app.use((req, res, next) => {
             };
             next();
         }else{
-            res.redirect('login');
+           res.redirect('/login');
         }
         }else{
             app.set('layout', 'layouts/default/index');
@@ -53,10 +54,19 @@ app.use(express.urlencoded({extended: true}));
 //Rotas
 app.get('/pessoas', PessoasController.getPessoas);
 app.post('/pessoas', PessoasController.addPessoa);
-app.put('/pessoas', PessoasController.addPessoa);
-app.get('/pessoas', PessoasController.addPessoa);
+app.delete('/pessoa', PessoasController.addPessoa);
+app.put('/pessoa', PessoasController.addPessoa);
+app.get('/pessoa', PessoasController.addPessoa);
 
 //Rotas de Usuários
+
+app.get('/cadastro',(req,res)=>{
+    UsuarioController.cadastro(req, res);
+})
+
+app.post('/cadastro', (req, res) => {
+    UsuarioController.cadastrar(req, res);
+})
 
 app.get('/login', (req, res) => {
     UsuarioController.login(req, res);
@@ -65,6 +75,8 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
     UsuarioController.autenticar(req, res);
 });
+
+app.get('/pessoas/delete/:id_pessoa', PessoasController.deletePessoa);
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

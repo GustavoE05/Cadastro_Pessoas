@@ -1,0 +1,20 @@
+<H1>Lista de Pessoas</H1>
+<ul>
+    <% pessoas.forEach(function(pessoa) { %>
+        <li><%= pessoa.nome %></li>
+        <div>
+            <a href="/pessoas/edit/<%- pessoa.id_pessoa %>">
+                <i class="bi-pencil-square"></i>
+            </a>
+        </div>
+        <div>
+            <a href="/pessoas/delete/<%- pessoa.id_pessoa %>">
+                <i class="bi-x-circle"></i>
+            </a>
+        </div>
+    <% }) %> 
+</ul>
+<form action="/pessoas" method="POST">
+    <input type="text" name="nome" placeholder="Nome">
+    <input type="submit" value="cadastrar">
+</form>

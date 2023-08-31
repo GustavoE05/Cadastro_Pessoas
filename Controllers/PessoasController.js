@@ -1,8 +1,9 @@
 const Pessoa = require('../Models/PessoasModels');
 let pessoas = [];
+
 async function getPessoas(req, res){
     try{
-        pessoas = await Pessoa.getPessoas();
+        pessoas = await Pessoa.listarPessoas();
         res.render('pessoas', {pessoas});
     }catch(err){
         res.status(500).json({message: err.message});
@@ -11,5 +12,16 @@ async function getPessoas(req, res){
 function addPessoa(req, res){
     const {nome} = req.body;
 
+    const pessoa = new Pessoa(null, nome, null, null, null, null, null);
+    pessoa.salvar();
+    res.redirect('/pessoas');
 }
-module.exports = {getPessoas, addPessoa};
+ async function deletePessoa(req, res){
+    if(await Pessoa.deletePessoa(req.params.id_pessoa)){
+        res.redirect('/pessoas');    
+    }else{
+        //res.status(500).json({message: 'Erro ao deletar pessoa!'});
+        res.redirect('/pessoas');
+    }
+}
+module.exports = {getPessoas, addPessoa, deletePessoa};
