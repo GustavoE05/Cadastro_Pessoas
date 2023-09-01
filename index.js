@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const multer = require('multer');
 const session = require('express-session');
 const PessoasController = require('./Controllers/PessoasController');
 const UsuarioController = require('./Controllers/UsuariosController');
@@ -9,7 +10,7 @@ const app = express();
 const port = 2000;
 const Database = require('./Models/Database');
 const Pessoa = require('./Models/PessoasModels');
-
+const upload = multer({ dest: 'uploads/' });
 
 app.use(express.static(path.join(__dirname, 'PUBLIC')));
 app.use(session({secret: 'l1nd4c4ch34d4'}));
@@ -75,6 +76,10 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
     UsuarioController.autenticar(req, res);
 });
+
+app.get('/pessoas/imagem/:id_pessoa', PessoasController.getImagem);
+
+app.post('/pessoas', upload.single('foto'), PessoasController.addPessoa);
 
 app.get('/pessoas/delete/:id_pessoa', PessoasController.deletePessoa);
 

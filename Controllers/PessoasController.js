@@ -1,4 +1,5 @@
 const Pessoa = require('../Models/PessoasModels');
+const fs = require('fs');
 let pessoas = [];
 
 async function getPessoas(req, res){
@@ -10,9 +11,10 @@ async function getPessoas(req, res){
     }
 }
 function addPessoa(req, res){
-    const {nome} = req.body;
+    const {nome, dataNascimento, cpf, rg, email} = req.body;
+    const foto = req.file;
 
-    const pessoa = new Pessoa(null, nome, null, null, null, null, null);
+    const pessoa = new Pessoa(null, nome, dataNascimento, cpf, rg, email, foto);
     pessoa.salvar();
     res.redirect('/pessoas');
 }
@@ -24,4 +26,24 @@ function addPessoa(req, res){
         res.redirect('/pessoas');
     }
 }
-module.exports = {getPessoas, addPessoa, deletePessoa};
+async function getImagem(req, res){
+    const id_pessoa = req.params.id_pessoa;
+    const pessoa = await Pessoa.getPessoa(id_pessoa);
+    if(pessoa){
+        const imagempath = pessoa.foto;
+
+        fs.readFile(imagempath, (err, data) => {
+            if(err){
+                res.status(500).json({message: err.message});
+            }else{
+                const base64 = data.toString('base64');
+                const img = 'data:image/png;base64,' + base64;
+                res.send(`<img src="${img}" alt="Imagem de ${pessoa.nome}">`);
+            }
+        });
+
+    }else{
+        res.status(404).json({message: 'Pessoa não encontrada!'});
+    }
+}
+module.exports = {getPessoas, addPessoa, deletePessoa, getImagem};

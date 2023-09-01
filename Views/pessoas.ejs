@@ -2,6 +2,11 @@
 <ul>
     <% pessoas.forEach(function(pessoa) { %>
         <li><%= pessoa.nome %></li>
+        <li><%= pessoa.dataNascimento %></li>
+        <li><%= pessoa.cpf %></li>
+        <li><%= pessoa.rg %></li>
+        <li><%= pessoa.email %></li>
+        <li><img src="/pessoas/imagem/<%= pessoa.id_pessoa %>" alt="Foto"></li>
         <div>
             <a href="/pessoas/edit/<%- pessoa.id_pessoa %>">
                 <i class="bi-pencil-square"></i>
@@ -16,5 +21,10 @@
 </ul>
 <form action="/pessoas" method="POST">
     <input type="text" name="nome" placeholder="Nome">
+    <input type="date" name="dataNascimento">
+    <input type="text" name="cpf" placeholder="CPF">
+    <input type="text" name="rg" placeholder="RG">
+    <input type="email" name="email" placeholder="E-mail">
+    <input type="file" name="foto" accept="image/*">
     <input type="submit" value="cadastrar">
 </form>

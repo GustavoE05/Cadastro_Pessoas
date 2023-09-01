@@ -15,7 +15,7 @@ class Pessoa{
     }
     salvar(){
         const db = require('./Database');
-        let resp = db.query(`INSERT INTO pessoas (nome) VALUES ('${this.nome}')`);
+        let resp = db.query(`INSERT INTO pessoas (nome, dataNascimento, cpf, rg, email, foto) VALUES ('${this.nome}', '${this.dataNascimento}', '${this.cpf}', '${this.rg}', '${this.email}', '${this.foto}')`);
         console.log(resp);
     }
     static async deletePessoa(id_pessoa){
@@ -30,6 +30,11 @@ class Pessoa{
     }else{
         return false;
     }
-}
+    }
+    static async getPessoa(id_pessoa){
+        const db = require('./Database');
+        let resp = await db.query(`SELECT * FROM pessoas WHERE id_pessoa=${id_pessoa}`);
+        return resp[0];
+    }
 }
 module.exports = Pessoa;
