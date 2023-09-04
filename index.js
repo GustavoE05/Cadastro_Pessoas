@@ -18,7 +18,7 @@ app.use(session({secret: 'l1nd4c4ch34d4'}));
 
 app.use((req, res, next) => {
     if(!req.session.user){
-        if(req.url == '/login' || req.url == '/autenticar' || req.url == '/cadastro' || req.url == '/'){
+        if(req.url == '/login' || req.url == '/autenticar' || req.url == '/cadastro' || req.url == '/home'){
             app.set('layout', 'layouts/default/login');
             res.locals.layoutsVAriables = {
                 url : process.env.URL,
@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 
 
 app.set('view engine', 'ejs');
-app.get('/', (req, res) => {    
+app.get('/home', (req, res) => {    
     res.render('home');
 });
 
