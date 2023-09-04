@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const multer = require('multer');
+const formiable = require('formidable');
 const session = require('express-session');
 const PessoasController = require('./Controllers/PessoasController');
 const UsuarioController = require('./Controllers/UsuariosController');
@@ -17,7 +18,7 @@ app.use(session({secret: 'l1nd4c4ch34d4'}));
 
 app.use((req, res, next) => {
     if(!req.session.user){
-        if(req.url == '/login' || req.url == '/autenticar' || req.url == '/cadastro'){
+        if(req.url == '/login' || req.url == '/autenticar' || req.url == '/cadastro' || req.url == '/'){
             app.set('layout', 'layouts/default/login');
             res.locals.layoutsVAriables = {
                 url : process.env.URL,
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
             next();
         }else{
            res.redirect('/login');
+           return;
         }
         }else{
             app.set('layout', 'layouts/default/index');
@@ -84,6 +86,7 @@ app.post('/login', (req, res) => {
 app.get('/logout', (req, res) => {
     UsuarioController.logout(req, res);
     res.redirect('/login'); 
+    return;
 });
 
 app.get('/pessoas/imagem/:id_pessoa', PessoasController.getImagem);
