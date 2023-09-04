@@ -18,7 +18,7 @@ app.use(session({secret: 'l1nd4c4ch34d4'}));
 
 app.use((req, res, next) => {
     if(!req.session.user){
-        if(req.url == '/login' || req.url == '/autenticar' || req.url == '/cadastro' || req.url == '/home'){
+        if(req.url == '/login' || req.url == '/autenticar' || req.url == '/cadastro' || req.url == '/'){
             app.set('layout', 'layouts/default/login');
             res.locals.layoutsVAriables = {
                 url : process.env.URL,
