@@ -21,6 +21,7 @@ input{
     outline: none;
     transform: translateY(-10%);
     color:#ffce51;
+    font-size: 1.5vw;
 }
 
 .submit input{
@@ -31,6 +32,40 @@ input{
     color: white;
     font-size: 1.5vw;
     margin-top: 1vw;
+}
+
+header{
+    width: 100%;
+    height: 12vw;
+    padding: 1.5vw;
+    background-color: #ffce51;
+    display: flex;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.center-title{
+    text-align: center;
+    flex-grow: 1; 
+    color: white;
+}
+
+.center-title h2 {
+    margin: 0; 
+}
+
+.right-logout {
+    margin-left: 10px; 
+}
+footer{
+    width: 100%;
+    height: 12vw;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 body {
@@ -60,79 +95,107 @@ body {
 }
 .card-pessoas{
     background-color: white;
-    width: 30vw;
-    height: 40vw;
+    width: 45vw;
+    height: 25vw;
     border-radius: 10px;
     padding: 0.8vw;
     margin-left: 2vw;
     margin-top: 1vw;
     color: #ffce51;
     float: left;
+    margin-bottom: 2vw;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
 }
 
-.personalizado{
-    width: 18vw;
-    height: 3vw;
+.normal{
+    padding: 5px;
+    width: 20vw;
+    height: 3.3vw;
     border: 2px solid #ffce51;
     border-radius: 10px;
     margin-top: 0.5vw;
     float: left;
-}
-
-.normal{
-    width: 100%;
-    height: 3vw;
-    border: 2px solid #ffce51;
-    border-radius: 10px;
-    margin-top: 0.5vw;
+    font-size: 1vw;
 }
 
 .image{
-    width: 10vw;
-    height: 10vw;
-    margin-left: 18.5vw;
-    margin-top: 0.5vw;
-    border-radius: 10px;
+    width: 20vw;
+    height: 23vw;
+    float: left;
+    margin-left: 0.5vw;
+    margin-right: 2vw;
     border: 2px solid #ffce51;
 }
 
 image img{
-    width: 10vw;
-    height: 12vw;
-    border-radius: 10px;
-}
-.delete{
-    height: 3vw;
-    width: 50%;
-    border-radius: 10px;
-    margin-top: 1vw;
-    background-color: red;  
-    float: left; 
-}
-.editar{
-    height: 3vw;
-    width: 50%;
-    border-radius: 10px;
-    margin-top: 1vw;
-    background-color:green; 
+    width: 20vw;
+    height: 23vw;
     
 }
-.cadastrar{
-    width: 25vw;
-    height: 35vw;
-    background-color: white;
+.delete{
     margin-left: 1vw;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    height: 3vw;
+    width: 3vw;
+    border-radius: 100px;
+    margin-top: 1vw;  
+    border: solid 2px red;
+    float: left; 
+}
+
+.delete i {
+    max-width: 1.667vw; 
+    max-height: 1.667vw; 
+    color: red;
+}
+
+.editar{
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    height: 3vw;
+    width: 3vw;
+    border-radius: 100px;
+    margin-top: 1vw;
+    border: solid 2px green; 
+    float: left;
+    
+}
+
+.editar i {
+    max-width: 1.667vw; 
+    max-height: 1.667vw; 
+    color: green;
+}
+
+.cadastrar{
+    margin: auto;
+    margin-top: 1vw;
+    width: 45vw;
+    height: 25vw;
+    background-color: white;
     border-radius: 10px;
     padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
 }
 
-input .person{
-    width: 16vw;
+.cadastra input{
+    margin-top: 0.2vw;
 }
 
-
+.button input{
+    margin-top: 1vw;
+    width: 10vw;
+    background-color: #ffce51;
+    color : white
+}
 #imagem{
     width: 8vw;
-    height: 10vw;
+    height: 23vw;
+    float: left;
+    margin-left: 0.5vw;
+    margin-right: 2vw;
 }
 

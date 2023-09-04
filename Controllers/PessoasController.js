@@ -21,19 +21,20 @@ async function getPessoas(req, res) {
 }
 
     async function deletePessoa(req, res){
-        
     if(await Pessoa.deletePessoa(req.params.id_pessoa)){
         msg={
           msg: req.session.msg = 'Pessoa deletada com sucesso!',
           class: 'alert-success'
         }
-        req.session.msg = msg; 
+        req.session.msg; 
         res.redirect('/pessoas'); 
     }else{
         msg={
             msg: req.session.msg = 'Erro ao deletar pessoa!',
             class: 'alert-danger'
         }
+        req.session.msg;
+        res.redirect('/pessoas');   
     
     }
 }

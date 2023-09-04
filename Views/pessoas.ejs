@@ -2,26 +2,27 @@
 
 <form action="/pessoas" method="POST">
 <div class="cadastrar">
-    <div class="person">
-    <input type="text" name="nome" placeholder="Nome Completo">
-    </div>
-    <div class="person">
-    <input type="date" name="dataNascimento">
-    </div>
     <div >
         <input id="imagem" type="file" name="foto" accept="image/*">
     </div>
-    <div>
-    <input type="text" name="cpf" placeholder="CPF">
+    <div class="cadastra">
+    <input type="text" name="nome" placeholder="Nome Completo">
     </div>
-    <div>
-    <input type="text" name="rg" placeholder="RG">
+    <div class="cadastra">
+    <input type="date" value="dd-mm-aaaa" name="dataNascimento">
     </div>
-    <div>
+    <div class="cadastra">
+    <input type="number" name="cpf" placeholder="CPF">
+    </div>
+    <div class="cadastra">
+    <input type="number" name="rg" placeholder="RG">
+    </div>
+    <div class="cadastra">
     <input type="email" name="email" placeholder="E-mail">
     </div>
-    
-    <input type="submit" value="cadastrar">
+    <div class="button">
+    <input type="submit" value="Cadastrar">
+    </div>
 </div>
 </form>
     
@@ -32,9 +33,9 @@
 
     <% pessoas.forEach(function(pessoa) { %>
         <div class="card-pessoas">
-        <div class="personalizado"><%= pessoa.nome %></div>
-        <div class="personalizado"><%= pessoa.dataNascimento %></div>
         <div class="image"><img src="/pessoas/imagem/<%= pessoa.id_pessoa %>" alt="Foto"></div>
+        <div class="normal"><%= pessoa.nome %></div>
+        <div class="normal"><%= pessoa.dataNascimento %></div>
         <div class="normal"><%= pessoa.cpf %></div>
         <div class="normal"><%= pessoa.rg %></div>
         <div class="normal"><%= pessoa.email %></div>
@@ -51,4 +52,16 @@
         </div>
     </div>
     <% }) %> 
+<!-- <script>
+const dataInput = document.getElementById('dataInput');
 
+dataInput.addEventListener('change',  (event) => function(){
+    const data = new Date(this.value);
+    const dia = data.getDate();
+    const mes = data.getMonth() + 1;
+    const ano = data.getFullYear();
+    const dataFormatada = dia + "/" + mes + "/" + ano;
+    this.value = dataFormatada;
+});
+
+</script>
