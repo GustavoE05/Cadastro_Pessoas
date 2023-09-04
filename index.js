@@ -23,7 +23,7 @@ app.use((req, res, next) => {
                 url : process.env.URL,
                 style : '/css/',
                 title : 'Login',
-                user : req.session.usuario
+                user : req.session.user
             };
             next();
         }else{
@@ -36,7 +36,7 @@ app.use((req, res, next) => {
                 img : '/img/',
                 style : '/css/',
                 title : 'Home',
-                user : req.session.usuario
+                user : req.session.user
             };
             next();
         }
@@ -77,9 +77,16 @@ app.post('/login', (req, res) => {
     UsuarioController.autenticar(req, res);
 });
 
+app.get('/logout', (req, res) => {
+    UsuarioController.logout(req, res);
+    res.redirect('/login'); 
+});
+
 app.get('/pessoas/imagem/:id_pessoa', PessoasController.getImagem);
 
 app.post('/pessoas', upload.single('foto'), PessoasController.addPessoa);
+
+app.get('/pessoas/edit/:id_pessoa', PessoasController.getPessoa);
 
 app.get('/pessoas/delete/:id_pessoa', PessoasController.deletePessoa);
 

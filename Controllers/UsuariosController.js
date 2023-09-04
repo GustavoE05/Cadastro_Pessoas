@@ -4,10 +4,10 @@ let usuarios = [];
      function login(req, res){
         res.render('login');
 }
+
     function cadastro(req, res){
         res.render('cadastro');
-    }
-
+}
 
     async function autenticar(req, res){
         if(req.body.email && req.body.senha){
@@ -25,6 +25,7 @@ let usuarios = [];
 
     }
 }
+
     async function cadastrar(req, res){
         const {nome, email, senha} = req.body;
         if(nome && email && senha){
@@ -34,5 +35,11 @@ let usuarios = [];
             }else{
                 res.redirect('/cadastro');
         }
-    }
-module.exports = {login, autenticar, cadastro, cadastrar};
+}
+
+    async function logout(req, res){
+        delete req.session.user;
+        res.redirect('/login');
+}
+
+module.exports = {login, autenticar, cadastro, cadastrar, logout};

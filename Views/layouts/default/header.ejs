@@ -1,0 +1,15 @@
+<header>
+    <div>
+        <h1> BEM VINDO AO CADASTRE.ME </h1>
+    </div>
+    <div>
+        <% if (locals.layoutsVariables.user) { %>
+            <p>
+                Olá, <%- locals.layoutsVariables.user.nome %>
+                <a href="/logout" class="btn-primary">
+                    <i class="bi bi-box-arrow-in-left"></i> logout
+                </a>                
+            </p>
+        <% } %>
+    </div>
+</header>
