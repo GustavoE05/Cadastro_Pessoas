@@ -37,7 +37,11 @@ app.use((req, res, next) => {
                 style : '/css/',
                 title : 'Home',
                 user : req.session.user
-            };
+            }
+            if(req.session.msg){
+                res.locals.layoutsVariables.msg = req.session.msg;
+                delete req.session.msg;
+            }
             next();
         }
 });
@@ -86,7 +90,15 @@ app.get('/pessoas/imagem/:id_pessoa', PessoasController.getImagem);
 
 app.post('/pessoas', upload.single('foto'), PessoasController.addPessoa);
 
-app.get('/pessoas/edit/:id_pessoa', PessoasController.getPessoa);
+app.get('/pessoas/edit/:id_pessoa', PessoasController.editPessoa);
+
+app.post('/pessoas/edit', PessoasController.updatePessoa);
+
+app.get('/pessoas/editar/:id_pessoa', PessoasController.editPessoa);
+
+app.post('/pessoas/editar', PessoasController.updatePessoa);
+
+app.post('/pessoas/editar/:id_pessoa', PessoasController.updatePessoa);
 
 app.get('/pessoas/delete/:id_pessoa', PessoasController.deletePessoa);
 

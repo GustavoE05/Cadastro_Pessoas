@@ -1,31 +1,54 @@
-<H1>Lista de Pessoas</H1>
-<ul>
+<div class="card-cadastrar">
+
+<form action="/pessoas" method="POST">
+<div class="cadastrar">
+    <div class="person">
+    <input type="text" name="nome" placeholder="Nome Completo">
+    </div>
+    <div class="person">
+    <input type="date" name="dataNascimento">
+    </div>
+    <div >
+        <input id="imagem" type="file" name="foto" accept="image/*">
+    </div>
+    <div>
+    <input type="text" name="cpf" placeholder="CPF">
+    </div>
+    <div>
+    <input type="text" name="rg" placeholder="RG">
+    </div>
+    <div>
+    <input type="email" name="email" placeholder="E-mail">
+    </div>
+    
+    <input type="submit" value="cadastrar">
+</div>
+</form>
+    
+</div>
+
+<H3 id="titulo">LISTA DE PESSOAS</h3>
+
+
     <% pessoas.forEach(function(pessoa) { %>
-        <li><%= pessoa.nome %></li>
-        <li><%= pessoa.dataNascimento %></li>
-        <li><%= pessoa.cpf %></li>
-        <li><%= pessoa.rg %></li>
-        <li><%= pessoa.email %></li>
-        <li><img src="/pessoas/imagem/<%= pessoa.id_pessoa %>" alt="Foto"></li>
-        <div>
+        <div class="card-pessoas">
+        <div class="personalizado"><%= pessoa.nome %></div>
+        <div class="personalizado"><%= pessoa.dataNascimento %></div>
+        <div class="image"><img src="/pessoas/imagem/<%= pessoa.id_pessoa %>" alt="Foto"></div>
+        <div class="normal"><%= pessoa.cpf %></div>
+        <div class="normal"><%= pessoa.rg %></div>
+        <div class="normal"><%= pessoa.email %></div>
+        
+        <div class="editar">
             <a href="/pessoas/edit/<%- pessoa.id_pessoa %>">
                 <i class="bi-pencil-square"></i>
             </a>
         </div>
-        <div>
+        <div class="delete">
             <a href="/pessoas/delete/<%- pessoa.id_pessoa %>">
                 <i class="bi-x-circle"></i>
             </a>
         </div>
-
+    </div>
     <% }) %> 
-</ul>
-<form action="/pessoas" method="POST">
-    <input type="text" name="nome" placeholder="Nome">
-    <input type="date" name="dataNascimento">
-    <input type="text" name="cpf" placeholder="CPF">
-    <input type="text" name="rg" placeholder="RG">
-    <input type="email" name="email" placeholder="E-mail">
-    <input type="file" name="foto" accept="image/*">
-    <input type="submit" value="cadastrar">
-</form>
+

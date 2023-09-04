@@ -2,15 +2,16 @@ const Pessoa = require('../Models/PessoasModels');
 const fs = require('fs');
 let pessoas = [];
 
-async function getPessoas(req, res){
-    try{
-        pessoas = await Pessoa.listarPessoas();
-        res.render('pessoas', {pessoas});
-    }catch(err){
-        res.status(500).json({message: err.message});
+async function getPessoas(req, res) {
+    try {
+        const pessoas = await Pessoa.listarPessoas();
+        res.render('pessoas', { pessoas, pessoa: {} }); // Defina pessoa como um objeto vazio inicialmente
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 }
-function addPessoa(req, res){
+
+    function addPessoa(req, res){
     const {nome, dataNascimento, cpf, rg, email} = req.body;
     const foto = req.file;
 
@@ -18,15 +19,49 @@ function addPessoa(req, res){
     pessoa.salvar();
     res.redirect('/pessoas');
 }
- async function deletePessoa(req, res){
+
+    async function deletePessoa(req, res){
+        
     if(await Pessoa.deletePessoa(req.params.id_pessoa)){
-        res.redirect('/pessoas');    
+        msg={
+          msg: req.session.msg = 'Pessoa deletada com sucesso!',
+          class: 'alert-success'
+        }
+        req.session.msg = msg; 
+        res.redirect('/pessoas'); 
     }else{
-        //res.status(500).json({message: 'Erro ao deletar pessoa!'});
-        res.redirect('/pessoas');
+        msg={
+            msg: req.session.msg = 'Erro ao deletar pessoa!',
+            class: 'alert-danger'
+        }
+    
     }
 }
-async function getImagem(req, res){
+
+async function editPessoa(req, res){
+    const id_pessoa = req.params.id_pessoa;
+    const pessoa = await Pessoa.getPessoa(id_pessoa);
+    if(pessoa){
+        res.render('editar', {pessoa});
+    }else{
+        res.status(404).json({message: 'Pessoa não encontrada!'});
+    }
+}
+
+
+async function updatePessoa(req, res){ 
+    const id_pessoa = req.params.id_pessoa; // Pegue o ID da URL
+    const {nome, dataNascimento, cpf, rg, email} = req.body;
+    const pessoa = new Pessoa(id_pessoa, nome, dataNascimento, cpf, rg, email, null);   
+    try{
+        await pessoa.editarPessoa();
+        res.redirect('/pessoas');
+    }catch(err){
+        res.status(500).json({message: err.message});
+    }
+}
+
+    async function getImagem(req, res){
     const id_pessoa = req.params.id_pessoa;
     const pessoa = await Pessoa.getPessoa(id_pessoa);
     if(pessoa){
@@ -46,4 +81,5 @@ async function getImagem(req, res){
         res.status(404).json({message: 'Pessoa não encontrada!'});
     }
 }
-module.exports = {getPessoas, addPessoa, deletePessoa, getImagem};
+
+module.exports = {getPessoas, addPessoa, deletePessoa, getImagem, editPessoa, updatePessoa,};

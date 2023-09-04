@@ -12,29 +12,127 @@ input{
     border: 2px solid #ffce51;
     padding: 3px;
     margin: 0px 0px 8px -5px;
+    font-size: 1.5vw;
 }
 .input input{
     margin-top: 1vw;
-    width: 80%;
+    width: 20vw;
     border: 2px solid #ffce51;
     outline: none;
     transform: translateY(-10%);
     color:#ffce51;
 }
-body{
+
+.submit input{
+    width: 10vw;
+    height: 3vw;
+    border-radius: 10px;
+    background-color: #ffce51;
+    color: white;
+    font-size: 1.5vw;
+    margin-top: 1vw;
+}
+
+body {
     width: 100%;
     height: 100vh;
-    background: linear-gradient(-45deg, #ffce51, #ff7253, #fd5754);
+    background: linear-gradient(-45deg, #ffce51, #ff7253, #fd5754, #aabbcc);
 }
 .card{
     width: 25vw;
     height: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    padding: 30px;
-    align-items: center;
+    padding: 15px;
     color: #ffce51;
 }
+
+#titulo{
+    color: white;
+    margin-left: 2vw;
+    margin-top: 0.5vw;
+}
+.card-pessoas{
+    background-color: white;
+    width: 30vw;
+    height: 40vw;
+    border-radius: 10px;
+    padding: 0.8vw;
+    margin-left: 2vw;
+    margin-top: 1vw;
+    color: #ffce51;
+    float: left;
+}
+
+.personalizado{
+    width: 18vw;
+    height: 3vw;
+    border: 2px solid #ffce51;
+    border-radius: 10px;
+    margin-top: 0.5vw;
+    float: left;
+}
+
+.normal{
+    width: 100%;
+    height: 3vw;
+    border: 2px solid #ffce51;
+    border-radius: 10px;
+    margin-top: 0.5vw;
+}
+
+.image{
+    width: 10vw;
+    height: 10vw;
+    margin-left: 18.5vw;
+    margin-top: 0.5vw;
+    border-radius: 10px;
+    border: 2px solid #ffce51;
+}
+
+image img{
+    width: 10vw;
+    height: 12vw;
+    border-radius: 10px;
+}
+.delete{
+    height: 3vw;
+    width: 50%;
+    border-radius: 10px;
+    margin-top: 1vw;
+    background-color: red;  
+    float: left; 
+}
+.editar{
+    height: 3vw;
+    width: 50%;
+    border-radius: 10px;
+    margin-top: 1vw;
+    background-color:green; 
+    
+}
+.cadastrar{
+    width: 25vw;
+    height: 35vw;
+    background-color: white;
+    margin-left: 1vw;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+input .person{
+    width: 16vw;
+}
+
+
+#imagem{
+    width: 8vw;
+    height: 10vw;
+}
+
