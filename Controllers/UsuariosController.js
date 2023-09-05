@@ -2,7 +2,7 @@ const UsuarioModel = require('../Models/UsuariosModels');
 let usuarios = [];  
 
      function login(req, res){
-        res.render('login');
+        res.render('login');  
 }
 
     function cadastro(req, res){

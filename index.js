@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     if(!req.session.user){
         if(req.url == '/login' || req.url == '/autenticar' || req.url == '/cadastro' || req.url == '/home'){
             app.set('layout', 'layouts/default/login');
-            res.locals.layoutsVAriables = {
+            res.locals.layoutsVariables = {
                 url : process.env.URL,
                 style : '/css/',
                 title : 'Login',
