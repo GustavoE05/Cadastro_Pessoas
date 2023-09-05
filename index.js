@@ -31,7 +31,7 @@ app.use((req, res, next) => {
            res.redirect('/login');
            return;
         }
-        }else{
+        }else if(req.session.user){
             app.set('layout', 'layouts/default/index');
             res.locals.layoutsVariables = {
                 url : process.env.URL,
@@ -39,6 +39,7 @@ app.use((req, res, next) => {
                 style : '/css/',
                 title : 'Home',
                 user : req.session.user
+            
             }
             if(req.session.msg){
                 res.locals.layoutsVariables.msg = req.session.msg;
