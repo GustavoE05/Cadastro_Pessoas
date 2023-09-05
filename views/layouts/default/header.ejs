@@ -2,13 +2,16 @@
     <div class="center-title">
         <h2> CADASTRE-ME </h2>
     </div>
-        <div class="rigth-logout">
+        <div style="margin-top: 3vw;"class="rigth-logout">
         <% if (locals.layoutsVariables.user) { %>
             <p>
                 Olá, <%- locals.layoutsVariables.user.nome %>
                 <a href="/logout" class="btn-primary">
                     <i class="bi bi-box-arrow-in-left"></i> logout
-                </a>                
+                </a>  
+                <div class="button-container">
+                    <a href="/"><button>home</button></a>
+                </div>             
             </p>
         <% } %>
     </div>

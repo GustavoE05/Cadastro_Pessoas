@@ -17,42 +17,41 @@ app.use(express.static(path.join(__dirname, 'PUBLIC')));
 app.use(session({secret: 'l1nd4c4ch34d4'}));
 
 app.use((req, res, next) => {
-    if (!req.session.user) {
-        if (req.url === '/login' || req.url === '/autenticar' || req.url === '/cadastro' || req.url === '/home') {
-            // Configurar o layout para rotas de login e home
+    if(!req.session.user){
+        if(req.url == '/login' || req.url == '/autenticar' || req.url == '/cadastro'){
             app.set('layout', 'layouts/default/login');
             res.locals.layoutsVariables = {
-                url: process.env.URL,
-                style: '/css/',
-                title: 'Login',
-                user: req.session.user
+                url : process.env.URL,
+                style : '/css/',
+                title : 'Login',
+                user : req.session.user
             };
-        } else {
-            // Redirecionar para a página de login em outras rotas não autenticadas
-            res.redirect('/login');
-            return;
+            next();
+        }else{
+           res.redirect('/login');
+           return;
         }
-    } else {
-        // Configurar o layout para rotas autenticadas
-        app.set('layout', 'layouts/default/index');
-        res.locals.layoutsVariables = {
-            url: process.env.URL,
-            img: '/img/',
-            style: '/css/',
-            title: 'Home',
-            user: req.session.user
-        };
-        if (req.session.msg) {
-            res.locals.layoutsVariables.msg = req.session.msg;
-            delete req.session.msg;
+        }else if(req.session.user){
+            app.set('layout', 'layouts/default/index');
+            res.locals.layoutsVariables = {
+                url : process.env.URL,
+                img : '/img/',
+                style : '/css/',
+                title : 'Home',
+                user : req.session.user
+            
+            }
+            if(req.session.msg){
+                res.locals.layoutsVariables.msg = req.session.msg;
+                delete req.session.msg;
+            }
+            next();
         }
-    }
-    next();
 });
 
 
 app.set('view engine', 'ejs');
-app.get('/home', (req, res) => {    
+app.get('/', (req, res) => {    
     res.render('home');
 });
 

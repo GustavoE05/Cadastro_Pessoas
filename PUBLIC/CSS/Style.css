@@ -8,7 +8,7 @@ h1{
 input{
     margin-top: 1vw;
     min-width: 20vw;
-    border-radius: 10px;
+    border-radius: 0.694vw;
     border: 2px solid #ffce51;
     padding: 3px;
     margin: 0px 0px 8px -5px;
@@ -27,7 +27,7 @@ input{
 .submit input{
     width: 10vw;
     height: 3vw;
-    border-radius: 10px;
+    border-radius: 0.694vw;
     background-color: #ffce51;
     color: white;
     font-size: 1.5vw;
@@ -47,8 +47,11 @@ header{
 }
 
 .center-title{
-    text-align: center;
-    flex-grow: 1; 
+    margin-left: 1vw;
+    color: white;
+}
+
+.user p{
     color: white;
 }
 
@@ -57,7 +60,7 @@ header{
 }
 
 .right-logout {
-    margin-left: 10px; 
+    margin-left: 0.694vw; 
 }
 
 
@@ -76,36 +79,36 @@ body {
     margin-top: 20vw;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 10px;
+    border-radius: 0.694vw;
     padding: 15px;
     color: #ffce51;
 }
 
 #titulo{
     color: white;
-    margin-left: 2vw;
-    margin-top: 0.5vw;
+    margin-left: 3vw;
+    margin-top: 1vw;
 }
 .card-pessoas{
     background-color: white;
     width: 45vw;
     height: 25vw;
-    border-radius: 10px;
+    border-radius: 0.694vw;
     padding: 0.8vw;
-    margin-left: 2vw;
-    margin-top: 1vw;
-    color: #ffce51;
+    margin-left: 3vw;
+    margin-top: 3vw;
+    color: black;
     float: left;
     margin-bottom: 2vw;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 0px 0.694vw rgba(0, 0, 0, 0.7);
 }
 
 .normal{
-    padding: 5px;
+    padding-left: 1vw;
     width: 20vw;
     height: 3.3vw;
     border: 2px solid #ffce51;
-    border-radius: 10px;
+    border-radius: 0.694vw;
     margin-top: 0.5vw;
     float: left;
     font-size: 1vw;
@@ -132,7 +135,7 @@ image img{
     justify-content: center;
     height: 3vw;
     width: 3vw;
-    border-radius: 100px;
+    border-radius: 6.944vw;
     margin-top: 1vw;  
     border: solid 2px red;
     float: left; 
@@ -150,7 +153,7 @@ image img{
     justify-content: center;
     height: 3vw;
     width: 3vw;
-    border-radius: 100px;
+    border-radius: 6.944vw;
     margin-top: 1vw;
     border: solid 2px green; 
     float: left;
@@ -169,9 +172,10 @@ image img{
     width: 45vw;
     height: 25vw;
     background-color: white;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+    border-radius: 0.694vw;
+    margin-bottom: 3vw;
+    padding: 0.694vw;
+    box-shadow: 0px 0px 0.694vw rgba(0, 0, 0, 0.7);
 }
 
 .cadastra input{
@@ -257,14 +261,14 @@ image img{
 
 .button-container button {
     margin-bottom: 2vw;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 0.694vw 1.389vw;
+    font-size: 1.111vw;
     background-color: #ffce51;
     color: #fff;
     border: none;
     cursor: pointer;
-    margin-right: 10px;
-    border-radius: 10px;
+    margin-right: 0.694vw;
+    border-radius: 0.694vw;
     display: inline-block; 
 }
 
