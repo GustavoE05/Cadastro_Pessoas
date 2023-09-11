@@ -1,11 +1,10 @@
 const Pessoa = require('../Models/PessoasModels');
-const fs = require('fs');
 let pessoas = [];
 
 async function getPessoas(req, res) {
     try {
         const pessoas = await Pessoa.listarPessoas();
-        res.render('pessoas', { pessoas, pessoa: {} }); // Defina pessoa como um objeto vazio inicialmente
+        res.render('pessoas', { pessoas, pessoa: {} }); 
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -13,7 +12,7 @@ async function getPessoas(req, res) {
 
     function addPessoa(req, res){
     const {nome, dataNascimento, cpf, rg, email} = req.body;
-    const foto = req.file;
+    const foto = req.file.filename;
 
     const pessoa = new Pessoa(null, nome, dataNascimento, cpf, rg, email, foto);
     pessoa.salvar();
@@ -43,6 +42,7 @@ async function editPessoa(req, res){
     const id_pessoa = req.params.id_pessoa;
     const pessoa = await Pessoa.getPessoa(id_pessoa);
     if(pessoa){
+        res.locals.layout = 'layouts/default/editar';
         res.render('editar', {pessoa});
     }else{
         res.status(404).json({message: 'Pessoa não encontrada!'});
@@ -51,36 +51,16 @@ async function editPessoa(req, res){
 
 
 async function updatePessoa(req, res){ 
-    const id_pessoa = req.params.id_pessoa; // Pegue o ID da URL
+    const id_pessoa = req.params.id_pessoa;
     const {nome, dataNascimento, cpf, rg, email} = req.body;
-    const pessoa = new Pessoa(id_pessoa, nome, dataNascimento, cpf, rg, email, null);   
+    const foto = req.file.filename;
+    const pessoa = new Pessoa(id_pessoa, nome, dataNascimento, cpf, rg, email, foto);   
     try{
         await pessoa.editarPessoa();
         res.redirect('/pessoas');
     }catch(err){
         res.status(500).json({message: err.message});
     }
-}
+} 
 
-    async function getImagem(req, res){
-    const id_pessoa = req.params.id_pessoa;
-    const pessoa = await Pessoa.getPessoa(id_pessoa);
-    if(pessoa){
-        const imagempath = pessoa.foto;
-
-        fs.readFile(imagempath, (err, data) => {
-            if(err){
-                res.status(500).json({message: err.message});
-            }else{
-                const base64 = data.toString('base64');
-                const img = 'data:image/png;base64,' + base64;
-                res.send(`<img src="${img}" alt="Imagem de ${pessoa.nome}">`);
-            }
-        });
-
-    }else{
-        res.status(404).json({message: 'Pessoa não encontrada!'});
-    }
-}
-
-module.exports = {getPessoas, addPessoa, deletePessoa, getImagem, editPessoa, updatePessoa,};
+module.exports = {getPessoas, addPessoa, deletePessoa, editPessoa, updatePessoa};

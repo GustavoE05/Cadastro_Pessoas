@@ -1,6 +1,6 @@
 <div class="card-cadastrar">
 
-<form action="/pessoas" method="POST">
+<form action="/pessoas" method="POST" enctype="multipart/form-data">
 <div class="cadastrar">
     <div >
         <input id="imagem" type="file" name="foto" accept="image/*">
@@ -33,7 +33,7 @@
 
     <% pessoas.forEach(function(pessoa) { %>
         <div class="card-pessoas">
-        <div class="image"><img src="/pessoas/imagem/<%= pessoa.id_pessoa %>" alt="Foto"></div>
+        <div class="image"><img class="foto" src="/Fotos/<%= pessoa.foto%>" alt=""></div>
         <div class="normal"><%= pessoa.nome %></div>
         <div class="normal"><%= pessoa.dataNascimento %></div>
         <div class="normal"><%= pessoa.cpf %></div>

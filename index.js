@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const multer = require('multer');
-const formiable = require('formidable');
 const session = require('express-session');
 const PessoasController = require('./Controllers/PessoasController');
 const UsuarioController = require('./Controllers/UsuariosController');
@@ -11,10 +10,23 @@ const app = express();
 const port = 2000;
 const Database = require('./Models/Database');
 const Pessoa = require('./Models/PessoasModels');
-const upload = multer({ dest: 'uploads/' });
+const uploadFile = multer({dest: './PUBLIC/Fotos'});
 
 app.use(express.static(path.join(__dirname, 'PUBLIC')));
 app.use(session({secret: 'l1nd4c4ch34d4'}));
+
+const Storage = multer.diskStorage({
+    filename: (req, file, cb) => {
+        let nome = Date.now()+"-"+file.originalname;
+        cb(null, nome);
+    },
+    destination: (req, file, cb) => {
+        let path = './PUBLIC/Fotos';
+        cb(null, path);
+    }
+});
+
+let upload = multer({storage: Storage});
 
 app.use((req, res, next) => {
     if(!req.session.user){
@@ -49,7 +61,6 @@ app.use((req, res, next) => {
         }
 });
 
-
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => {    
     res.render('home');
@@ -61,7 +72,7 @@ app.use(express.urlencoded({extended: true}));
 
 //Rotas
 app.get('/pessoas', PessoasController.getPessoas);
-app.post('/pessoas', PessoasController.addPessoa);
+app.post('/pessoas', upload.single("foto"), PessoasController.addPessoa);
 app.delete('/pessoa', PessoasController.addPessoa);
 app.put('/pessoa', PessoasController.addPessoa);
 app.get('/pessoa', PessoasController.addPessoa);
@@ -77,8 +88,12 @@ app.post('/cadastro', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
+    if (req.session.user) {
+        res.redirect('/pessoas'); 
+        return;
+    }
     UsuarioController.login(req, res);
-})
+});
 
 app.post('/login', (req, res) => {
     UsuarioController.autenticar(req, res);
@@ -90,19 +105,15 @@ app.get('/logout', (req, res) => {
     return;
 });
 
-app.get('/pessoas/imagem/:id_pessoa', PessoasController.getImagem);
-
-app.post('/pessoas', upload.single('foto'), PessoasController.addPessoa);
-
 app.get('/pessoas/edit/:id_pessoa', PessoasController.editPessoa);
 
-app.post('/pessoas/edit', PessoasController.updatePessoa);
+app.post('/pessoas/edit/:id_pessoa', PessoasController.updatePessoa);
 
 app.get('/pessoas/editar/:id_pessoa', PessoasController.editPessoa);
 
 app.post('/pessoas/editar', PessoasController.updatePessoa);
 
-app.post('/pessoas/editar/:id_pessoa', PessoasController.updatePessoa);
+app.post('/pessoas/editar/:id_pessoa', upload.single("foto"), PessoasController.updatePessoa);
 
 app.get('/pessoas/delete/:id_pessoa', PessoasController.deletePessoa);
 

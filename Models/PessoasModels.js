@@ -38,7 +38,7 @@ class Pessoa{
     }
     async editarPessoa(){
         const db = require('./Database');
-        let resp = await db.query(`UPDATE pessoas SET nome='${this.nome}', dataNascimento='${this.dataNascimento}', cpf='${this.cpf}', rg='${this.rg}', email='${this.email}' WHERE id_pessoa=${this.id_pessoa}`);
+        let resp = await db.query(`UPDATE pessoas SET nome='${this.nome}', dataNascimento='${this.dataNascimento}', cpf='${this.cpf}', rg='${this.rg}', email='${this.email}', foto='${this.foto}' WHERE id_pessoa=${this.id_pessoa}`);
         console.log(resp);
     }
 }
