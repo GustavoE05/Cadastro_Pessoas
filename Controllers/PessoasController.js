@@ -12,12 +12,17 @@ async function getPessoas(req, res) {
 
     function addPessoa(req, res){
     const {nome, dataNascimento, cpf, rg, email} = req.body;
-    const foto = req.file.filename;
-
-    const pessoa = new Pessoa(null, nome, dataNascimento, cpf, rg, email, foto);
-    pessoa.salvar();
-    res.redirect('/pessoas');
-}
+    let foto = 'sem-foto.png';
+    if (req.file) {
+        foto = req.file.filename; 
+      }
+    
+      const pessoa = new Pessoa(null, nome, dataNascimento, cpf, rg, email, foto);
+    
+      pessoa.salvar();
+    
+      res.redirect('/pessoas');
+    }
 
     async function deletePessoa(req, res){
     if(await Pessoa.deletePessoa(req.params.id_pessoa)){
@@ -50,17 +55,27 @@ async function editPessoa(req, res){
 }
 
 
-async function updatePessoa(req, res){ 
+async function updatePessoa(req, res) {
     const id_pessoa = req.params.id_pessoa;
-    const {nome, dataNascimento, cpf, rg, email} = req.body;
-    const foto = req.file.filename;
-    const pessoa = new Pessoa(id_pessoa, nome, dataNascimento, cpf, rg, email, foto);   
-    try{
+    const { nome, dataNascimento, cpf, rg, email } = req.body;
+    let foto; 
+
+    if (req.file) {
+        foto = req.file.filename; 
+    } else {
+        
+        const pessoaAntiga = await Pessoa.getPessoa(id_pessoa);
+        foto = pessoaAntiga.foto;
+    }
+
+    const pessoa = new Pessoa(id_pessoa, nome, dataNascimento, cpf, rg, email, foto);
+
+    try {
         await pessoa.editarPessoa();
         res.redirect('/pessoas');
-    }catch(err){
-        res.status(500).json({message: err.message});
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
-} 
+};
 
 module.exports = {getPessoas, addPessoa, deletePessoa, editPessoa, updatePessoa};
